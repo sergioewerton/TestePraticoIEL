@@ -1,0 +1,60 @@
+﻿@model IEnumerable<CadastroIEL.Models.Estudante>
+
+@{
+    ViewData["Title"] = "Estudantes Cadastrados";
+}
+
+<h1>Estudantes Cadastrados</h1>
+<form asp-controller="Estudantes" asp-action="Index" method="get">
+    <p>
+        Pesquisar: <input type="text" name="SearchString" />
+        <input type="submit" value="Filtrar" class="btn btn-sm btn-primary" />
+        <a asp-action="Index" class="btn btn-sm btn-secondary">Limpar Filtro</a>
+    </p>
+</form>
+
+<p>
+    <a asp-action="Create">Adicionar Novo Estudante</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CPF)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Endereco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataConclusao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CPF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Endereco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataConclusao)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id ">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Tem certeza que deseja excluir este estudante?');">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
